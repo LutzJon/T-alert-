@@ -21,5 +21,17 @@ module.exports = {
 		 	console.log('Turds from getTurds: ' + turds);
              res.status(200).send(turds);
 		 });
-	}
+	},
+	getTurd: function(req, res){
+	   	Turd
+	   	.find({_id: req.params.id})
+	   	.exec()
+	   	.then(function(turd){
+	   		if(!turd.length){
+	   			res.status(404).end()
+	   		} else {
+	   			res.status(200).send(turd)
+	   		}
+	   	})
+	   },
 };

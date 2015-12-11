@@ -11,7 +11,7 @@ var express =require('express')
     app.use(cors());
 
     app.post('/api/turds', turdCtrl.addTurd);
-    // app.get('/api/turds', turdCtrl.getTurds);
+    app.get('/api/turds', turdCtrl.getTurds);
     // app.patch('/api/turds/:id', turdCtrl.patchTurd);
     // app.delete('/api/turds/:id', turdCtrl.deleteTurd);
 

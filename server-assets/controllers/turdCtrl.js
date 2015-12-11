@@ -7,9 +7,19 @@ module.exports = {
       .save(function(err, results) {
 		if(!err) {
 		  res.status(201).send(results);
-		} else {
+		}else {
 		  res.status(500).send(err);
 				}
 		   });
+	},
+
+	getTurds: function(req, res) {
+		Turd
+		 .find()
+		 .exec()
+		 .then(function(turds){
+		 	console.log('Turds from getTurds: ' + turds);
+             res.status(200).send(turds);
+		 });
 	}
 };

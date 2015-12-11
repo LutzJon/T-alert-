@@ -5,6 +5,6 @@ var Turd = mongoose.model('Turd', new mongoose.Schema({
 	location: String,
 	date: {type: Date, default: Date.now()},
 	picture: {data: Buffer, contentType: String}
-}))
+}));
 
 module.exports = mongoose.model('Turd', Turd);

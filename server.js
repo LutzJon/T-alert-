@@ -12,8 +12,9 @@ var express =require('express')
 
     app.post('/api/turds', turdCtrl.addTurd);
     app.get('/api/turds', turdCtrl.getTurds);
-    // app.patch('/api/turds/:id', turdCtrl.patchTurd);
-    // app.delete('/api/turds/:id', turdCtrl.deleteTurd);
+    app.get('api/turd/:id', turdCtrl.getTurd);
+    app.patch('/api/turd/:id', turdCtrl.patchTurd);
+    app.delete('/api/turd/:id', turdCtrl.removeTurd);
 
 
 

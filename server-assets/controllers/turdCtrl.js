@@ -28,10 +28,36 @@ module.exports = {
 	   	.exec()
 	   	.then(function(turd){
 	   		if(!turd.length){
-	   			res.status(404).end()
+	   			res.status(404).end();
 	   		} else {
-	   			res.status(200).send(turd)
+	   			res.status(200).send(turd);
 	   		}
-	   	})
+	   	});
 	   },
+
+	   patchTurd: function(req, res){
+	   	Turd
+	   	 .update({_id: req.params.id}, req.body, function(err, results){
+	   		if(err){
+	   			res.status(500).send(err);
+	   		}else{
+	   			res.status(200).send(results);
+	   		}
+	   	});
+	   },
+
+
+	 removeTurd: function(req, res){
+	 	Turd 
+	 	 .remove({_id: req.params.id}, function(err, results){
+
+             if(!err){
+             	res.status(204).end();
+             } else{ 
+             	res.status(500).send(err);
+             }
+	 	 });
+
+	 	 
+	 }
 };

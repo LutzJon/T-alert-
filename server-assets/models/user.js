@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+
 var User = mongoose.model('User', new mongoose.Schema({
   userName: {type: String, required: true}, 
   password: {type: String, required: true},
@@ -8,6 +9,7 @@ var User = mongoose.model('User', new mongoose.Schema({
   avatar: {data: Buffer, contentType: String},
   stinkLevel: Number
 }));
+
 
 
 

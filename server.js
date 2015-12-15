@@ -5,6 +5,9 @@ var express =require('express')
   , session = require('express-session')
   , FacebookStrategy = require('passport-facebook')
   , passport = require('passport')
+  , fs = require('fs')
+  , http = require('http')
+  , path = require('path')
   , app = express()
   , port = 8080
   , mongoUri = 'mongodb://localhost:27017/t-alert-'
@@ -24,10 +27,31 @@ var express =require('express')
     app.use(express.static(__dirname+'/public'));
 
 
+    //img upload
+    app.get('/', function(req, res){
+    res.sendfile(__dirname + '/mainturds.html');
+});
 
+app.post('/upload', function(req, res) {
+    var image =  req.files.image;
+    var newImageLocation = path.join(__dirname, 'public/images', image.name);
+    
+    fs.readFile(image.path, function(err, data) {
+        fs.writeFile(newImageLocation, data, function(err) {
+            res.json(200, { 
+                src: 'images/' + image.name,
+                size: image.size
+            });
+        });
+    });
+});
+
+
+
+//facebook stuff
     passport.use(new FacebookStrategy({
-  clientID:"1629221034009715",
-  clientSecret:"c9ce134b4f3be9f6a1c86f292c917dd4" ,
+  clientID:"need new",
+  clientSecret:"need new" ,
   callbackURL: "http://localhost:8080/api/auth/facebook/callback"
 }, function(token, refreshToken, profile, done) {
   return done(null, profile);
@@ -39,12 +63,12 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(obj, done){
   done(null,obj);
 });
-
-app.get('/api/auth/facebook', passport.authenticate('facebook'));
-app.get('/api/auth/facebook/callback', passport.authenticate('facebook', {
-  successRedirect: '/api/me',
-  failureRedirect: '/#/login'
-}), function (req, res) {
+//facebook auth
+   app.get('/api/auth/facebook', passport.authenticate('facebook'));
+   app.get('/api/auth/facebook/callback', passport.authenticate('facebook', {
+     successRedirect: '/api/me',
+     failureRedirect: '/#/login'
+  }), function (req, res) {
   console.log('You have booked the face');
 
 });

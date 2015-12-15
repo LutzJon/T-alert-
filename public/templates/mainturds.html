@@ -1,0 +1,25 @@
+
+<html>
+<body>
+
+<h2>Single image with resizing</h2>
+        <div>
+            <label for="inputImage2">Image 2</label>
+            
+            <input id="inputImage2" 
+                type="file" 
+                accept="image/*" 
+                image="image2" 
+                resize-max-height="300"
+                resize-max-width="250"
+                resize-quality="0.7" />
+            
+            <p>Original</p>
+            <img ng-show="image2" ng-src="{{image2.url}}" type="{{image2.file.type}}"/>
+            <p>Resized</p>
+            <img ng-show="image2" ng-src="{{image2.resized.dataURL}}"/>
+            <button type="submit" ng-click="single(image2.resized)" disabled>Add</button>
+        </div>
+
+</body>
+</html>
